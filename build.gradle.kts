@@ -173,6 +173,7 @@ val copyDocs by tasks.creating(Copy::class) {
 
 tasks.prepareSandbox {
     dependsOn(compileDotNet)
+    dependsOn(copyDocs)
 
     val outputFolder = "${rootDir}/src/dotnet/${DotnetPluginId}/bin/${DotnetPluginId}.Rider/${BuildConfiguration}"
     val dllFiles = listOf(

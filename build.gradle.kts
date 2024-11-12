@@ -165,6 +165,11 @@ tasks.patchPluginXml {
         it.groups[1]!!.value.replace("(?s)\r?\n".toRegex(), "<br />\n")
     }.take(1).joinToString())
 }
+// 将UnrealSpecifier的文档放入插件运行时目录下
+val copyDocs by tasks.creating(Copy::class) {
+    from("${rootDir}/UnrealSpecifiers/Doc/zh")
+    into("${rootDir}/build/distributions")
+}
 
 tasks.prepareSandbox {
     dependsOn(compileDotNet)
@@ -173,10 +178,13 @@ tasks.prepareSandbox {
     val dllFiles = listOf(
             "$outputFolder/${DotnetPluginId}.dll",
             "$outputFolder/${DotnetPluginId}.pdb",
-
+//        添加Markdig用于Markdown处理
+            "$outputFolder/Markdig.dll"
             // TODO: add additional assemblies
     )
-
+    from(copyDocs.outputs.files.first()){
+        into("${rootProject.name}/documentation")
+    }
     dllFiles.forEach({ f ->
         val file = file(f)
         from(file, { into("${rootProject.name}/dotnet") })

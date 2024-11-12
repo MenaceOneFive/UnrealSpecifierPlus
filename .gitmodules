@@ -1,0 +1,3 @@
+[submodule "UnrealSpecifiers"]
+	path = UnrealSpecifiers
+	url = https://github.com/fjz13/UnrealSpecifiers.git

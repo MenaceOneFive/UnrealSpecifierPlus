@@ -167,7 +167,7 @@ tasks.patchPluginXml {
 }
 // 将UnrealSpecifier的文档放入插件运行时目录下
 val copyDocs by tasks.creating(Copy::class) {
-    from("${rootDir}/UnrealSpecifiers/Doc/zh")
+    from("${rootDir}/UnrealSpecifiers/Doc/en")
     into("${rootDir}/build/distributions")
 }
 
